@@ -1,0 +1,1 @@
+Simple mandelbrot set generator
