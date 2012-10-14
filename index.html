@@ -7,7 +7,10 @@
  
 <body onload="Mandelbrot()">
     <h1>Mandelbrot</h1>
- 
+    Click on canvas to change boxing (autozoom).<br/>
+    First click set top-left corner, second click set bottom-right corner (and so on).<br/>
+    Then click on "Generate" to see result or "reset" to get default values.<br/><br/>
+    
     <form id="calcdata" onsubmit="javascript:Mandelbrot(); return false;">
         <table>
             <tr>
@@ -34,5 +37,32 @@
         <canvas id="mandelimage" width="900" height="600">
             Mettre votre navigateur à jour pour supporter html5 et canvas
         </canvas>
+        
+        <script>
+            canvas = document.getElementById('mandelimage');
+            width = canvas.width;
+            height = canvas.height;
+            canvas.addEventListener("click", canvas_onClick, false);
+            cd = document.getElementById('calcdata');
+            first_click = true;
+            
+            function canvas_onClick(event) {
+                x = event.x - canvas.offsetLeft;
+                y = event.y - canvas.offsetTop;
+                
+                x = xmin + (xmax - xmin) * x / (width - 1);
+                y = ymin + (ymax - ymin) * y / (height - 1);
+                
+                if (first_click) {
+                    cd.xmin.value = x;
+                    cd.ymin.value = y;
+                    first_click = false;
+                } else {
+                    cd.xmax.value = x;
+                    cd.ymax.value = y;
+                    first_click = true;
+                }
+            }
+        </script>
     </body>
     </html>
