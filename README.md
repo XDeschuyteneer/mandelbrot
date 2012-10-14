@@ -1,1 +1,1 @@
-Simple mandelbrot set generator
+Simple mandelbrot set generator in javascript and html5
